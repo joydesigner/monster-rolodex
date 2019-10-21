@@ -4,14 +4,17 @@ import './App.css';
 import { SearchBox } from './components/search-box/search-box.component';
 
 class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      monsters: [],
-      searchField: ''
-    }
-    //this.handleChange = this.handleChange.bind(this);
+  // constructor() {
+  //   super();
+  // this.state = {
+  //   monsters: [],
+  //   searchField: ''
+  // }
+  //this.handleChange = this.handleChange.bind(this);
+  // }
+  state = {
+    monsters: [],
+    searchField: ''
   }
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
@@ -22,8 +25,8 @@ class App extends Component {
         this.setState({ monsters: users });
       });
   }
-  handleChange = e => {
-    this.setState({ searchField: e.target.value });
+  onSearchChange = event => {
+    this.setState({ searchField: event.target.value });
   }
   render() {
     const { monsters, searchField } = this.state;
@@ -33,7 +36,7 @@ class App extends Component {
         <h1>Monster Rolodex</h1>
         <SearchBox
           placeholder="search monsters..."
-          handleChange={this.handleChange} />
+          handleChange={this.onSearchChange} />
         <CardList monsters={filteredMonsters} />
       </div>
     );
